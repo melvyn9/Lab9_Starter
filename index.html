@@ -91,11 +91,28 @@
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
-      let output = document.querySelector('output');
-      let firstNum = document.querySelector('#first-num').value;
-      let secondNum = document.querySelector('#second-num').value;
-      let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      // Step 3 using try, catch, throw, finally
+      try {
+        let output = document.querySelector('output');
+        let firstNum = document.querySelector('#first-num').value;
+        let secondNum = document.querySelector('#second-num').value;
+        // Step 3 using throw
+        if (firstNum == "" || secondNum == "") {
+          throw "No input given";
+        }
+        let operator = document.querySelector('#operator').value
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+        // Step 4 using custom throw
+        if (output.innerHTML === null) {
+          throw new TypeError("Whoopsie, wrong input type given!");
+        }
+      }
+      catch (err) {
+        console.log("Error detected in the program: " + err);
+      }
+      finally {
+        console.log("Code that executes after try catch");
+      };
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
