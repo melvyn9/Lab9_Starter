@@ -100,7 +100,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
     //Console Global
     document.getElementById("consoleGlobal").addEventListener("click", () => {
-        const badCode = "const s";
-        eval(badCode);
+        alert("Demonstrating an error");
+        // Undefined function
+        undefinedFunction();
     });
+
+    //Catch global error
+    window.onerror = function(event, source, lineno, colno, error) {
+        // Log the error
+        console.log("Error: " + event + "\nSource: " + source + "\nLine: " + lineno + "\nColumn:" + colno);
+
+        var suppressErrorAlert = true;
+        // If you return true, then error alerts (like in older versions of 
+        // Internet Explorer) will be suppressed.
+        return suppressErrorAlert;
+     };
 })
