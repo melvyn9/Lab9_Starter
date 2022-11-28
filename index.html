@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 9</title>
   <!-- Tracking Script -->
-  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js" crossorigin="annonymous"></script>
   <script>
     window.TrackJS && TrackJS.install({ 
       token: "92f9ab178ca0497482434982e7d2553e"
@@ -105,15 +105,15 @@
         let output = document.querySelector('output');
         let firstNum = document.querySelector('#first-num').value;
         let secondNum = document.querySelector('#second-num').value;
-        // Step 3 using throw
+        // Step 4 using custom throw - inputError
         if (firstNum == "" || secondNum == "") {
-          throw "No input given";
+          throw new inputError("Whoopsie, no input given!");
         }
         let operator = document.querySelector('#operator').value
         output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
-        // Step 4 using custom throw
+        // Step 3 using throw
         if (output.innerHTML === null) {
-          throw new TypeError("Whoopsie, wrong input type given!");
+          throw "invalid input types";
         }
       }
       catch (err) {
@@ -123,6 +123,15 @@
         console.log("Code that executes after try catch");
       };
     });
+
+    // Defining my custom error
+    class inputError extends Error {
+      constructor(message, cause) {
+        super(message);
+        this.cause = cause;
+        this.name = 'inputError';
+      }
+    }
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 

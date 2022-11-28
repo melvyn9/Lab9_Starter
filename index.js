@@ -106,9 +106,9 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     //Catch global error
-    window.onerror = function(event, source, lineno, colno, error) {
+    window.onerror = function(message, source, lineno, colno, error) {
         // Log the error
-        console.log("Error: " + event + "\nSource: " + source + "\nLine: " + lineno + "\nColumn:" + colno);
+        console.log("Error: " + message + "\nSource: " + source + "\nLine: " + lineno + "\nColumn: " + colno);
 
         var suppressErrorAlert = true;
         // If you return true, then error alerts (like in older versions of 
